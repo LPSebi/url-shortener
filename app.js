@@ -27,10 +27,9 @@ app.post('/api/shorturl', (req, res) => {
 
 app.get('/api/shorturl/:short_url', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*')
-    const short_url = req.params.short_url
-    return res.redirect(urls[short_url])
+    const short_url = Number(req.params.short_url)
+    return res.redirect(urls[short_url], 301)
 })
-
 app.listen(3000, () => {
     console.log('Server is running on port 3000')
 })
