@@ -9,7 +9,7 @@ app.post('/api/shorturl', (req, res) => {
     // get posted url
     console.log(req.body)
     // validate wiht dns.lookup
-    if (!dns.lookup(req.body, (err) => err)) {
+    if (!dns.lookup(req.body, (err) => err) || !req.body) {
         return res.json({
             error: 'invalid url',
         })
