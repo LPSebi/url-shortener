@@ -10,16 +10,18 @@ app.post('/api/shorturl', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*')
     // get posted url
     console.log(req.body.url)
-    // validate wiht dns.lookup
-    if (!dns.lookup(req.body.url, (err) => err) || !req.body.url) {
+    // validate with dns.lookup
+    dns.lookup(req.body.url, (err) => {
+        if (err || !req.body.url) {
+            return res.json({
+                error: 'invalid url',
+            })
+        }
+        urls.push(req.body.url)
         return res.json({
-            error: 'invalid url',
+            original_url: req.body.url,
+            short_url: urls.length - 1,
         })
-    }
-    urls.push(req.body.url)
-    return res.json({
-        original_url: req.body.url,
-        short_url: urls.length - 1,
     })
 })
 
