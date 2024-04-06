@@ -1,13 +1,16 @@
 import express from 'express'
-
+import dns from 'dns'
 const app = express()
 
 const urls = []
 
 app.post('/api/shorturl', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*')
+    // get posted url
+    console.log(req.body)
     urls.push(req.body)
-    if (!(req.body.startsWith('http://') || req.body.startsWith('https://'))) {
+    // validate wiht dns.lookup
+    if (!dns.lookup(req.body, (err) => err)) {
         res.json({
             error: 'invalid url',
         })
