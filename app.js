@@ -4,7 +4,7 @@ const app = express()
 
 const urls = []
 
-app.post('api/shorturl', (req, res) => {
+app.post('/api/shorturl', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*')
     urls.push(req.body.url)
     if (
