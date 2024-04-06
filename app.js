@@ -8,15 +8,15 @@ app.post('/api/shorturl', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*')
     // get posted url
     console.log(req.body)
-    urls.push(req.body)
     // validate wiht dns.lookup
     if (!dns.lookup(req.body, (err) => err)) {
         res.json({
             error: 'invalid url',
         })
     }
+    urls.push(req.body)
     res.json({
-        original_url: 'https://www.google.com',
+        original_url: req.body,
         short_url: urls.length - 1,
     })
 })
