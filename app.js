@@ -6,13 +6,8 @@ const urls = []
 
 app.post('/api/shorturl', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*')
-    urls.push(req.body.url)
-    if (
-        !(
-            req.body.url.startsWith('http://') ||
-            req.body.url.startsWith('https://')
-        )
-    ) {
+    urls.push(req.body)
+    if (!(req.body.startsWith('http://') || req.body.startsWith('https://'))) {
         res.json({
             error: 'invalid url',
         })
