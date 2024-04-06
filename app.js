@@ -12,7 +12,7 @@ app.post('/api/shorturl', (req, res) => {
     console.log(req.body.url)
     // validate with dns.lookup
     dns.lookup(new URL(req.body.url).hostname, (err) => {
-        if (err || !req.body.url) {
+        if (err) {
             return res.json({
                 error: 'invalid url',
             })
@@ -30,6 +30,12 @@ app.get('/api/shorturl/:short_url', (req, res) => {
     const short_url = Number(req.params.short_url)
     return res.redirect(urls[short_url], 301)
 })
+
+app.get('/', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.end('Hello World!')
+})
+
 app.listen(3000, () => {
     console.log('Server is running on port 3000')
 })
