@@ -5,6 +5,7 @@ const app = express()
 const urls = []
 
 app.post('api/shorturl', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*')
     urls.push(req.body.url)
     if (
         !(
@@ -23,6 +24,7 @@ app.post('api/shorturl', (req, res) => {
 })
 
 app.get('/api/shorturl/:short_url', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*')
     const short_url = req.params.short_url
     res.redirect(urls[short_url])
 })
