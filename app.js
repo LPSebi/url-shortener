@@ -1,6 +1,8 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import dns from 'dns'
 const app = express()
+app.use(bodyParser.text())
 
 const urls = []
 
